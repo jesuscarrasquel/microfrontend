@@ -1,8 +1,8 @@
-import { mount } from "marketing/MarketingApp";
+import { mount } from "auth/AuthApp";
 import React, { useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-export default () => {
+export default ({ onSignIn }) => {
   const ref = useRef(null);
   const history = useHistory();
   useEffect(() => {
@@ -11,10 +11,11 @@ export default () => {
       onNavigate: ({ pathname: nextPathname }) => {
         const { pathname } = history.location;
         if (pathname !== nextPathname) {
-          console.log("The container noticed navigation in Marketing");
+          console.log("The container noticed navigation in auth");
           history.push(nextPathname);
         }
       },
+      onSignIn,
     });
     history.listen(onParentNavigate);
   }, []);
